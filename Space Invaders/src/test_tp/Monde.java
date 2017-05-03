@@ -83,6 +83,13 @@ public class Monde extends JPanel {
                     bougerEtoiles();
                     invalidate();
                     repaint();
+                } else {
+                    fickLights();
+
+                    invalidate();
+                    repaint();
+
+
                 }
 
                 try {
@@ -162,16 +169,37 @@ public class Monde extends JPanel {
 
     };
 
+    private void fickLights() {
+        if(getBackground().equals(Color.black)){
+            sleeper(100);
+            setBackground(Color.gray);
+        }else {
+            sleeper(100);
+            setBackground(Color.black);
+        }
+    }
+
+    public void sleeper(long timeSec){
+        try {
+            sleep(timeSec);
+        } catch (InterruptedException e) {
+            System.out.println("Timer error");
+        }
+    }
+
+
     public Monde() {
-score = 0;
+        score = 0;
         setSize(800, 500);
         boss = new Boss(2, 2);
         add(boss);
         boss.setLocation(800, 100);
+
         for (int i = 0; i < 10; i++) {
             listCoul.add(Color.white);
             listCoul.add(Color.gray);
         }
+
         timer.start();
 
         trdEtoiles.start();
