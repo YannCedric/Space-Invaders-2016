@@ -25,7 +25,7 @@ public class Main {
         
         
         JOptionPane.showMessageDialog(null, "Bienvenu dans Space Invader!");
-        Fenetre fenetre = new Fenetre( );
+        Fenetre fenetre = new Fenetre();
         
     }
     
