@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package test_tp;
 
 
@@ -16,8 +12,6 @@ import java.awt.event.MouseEvent;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -73,30 +67,19 @@ public class Monde extends JPanel {
 
             super.run(); //To change body of generated methods, choose Tools | Templates.
             listCoeurs.add(new Coeur());
-            int i = 0;
+
             while (threadEtoiles) {
 
-                if (isBoss == false) {
+                if (!isBoss) {
                     enleverEtoiles();
-
                     creationEtoilesAdroite();
                     bougerEtoiles();
-                    invalidate();
-                    repaint();
-                } else {
+                } else
                     fickLights();
 
-                    invalidate();
-                    repaint();
-
-
-                }
-
-                try {
-                    sleep(10);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Monde.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                invalidate();
+                repaint();
+                sleeper(5);
             }
         }
     };
@@ -105,9 +88,10 @@ public class Monde extends JPanel {
 
         @Override
         public void run() {
-            super.run(); //To change body of generated methods, choose Tools | Templates.
+            super.run();
             add(vsau);
             listCoeurs.add(new Coeur());
+
             while (threadVaisseau) {
                 lblScore.setText("Score : " + score);
                 deplacerVaisseauTouches(8);
@@ -158,11 +142,7 @@ public class Monde extends JPanel {
 
 //                invalidate();
 //                repaint();
-                try {
-                    sleep(14);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Monde.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                sleeper(10);
             }
 
         }
@@ -179,9 +159,9 @@ public class Monde extends JPanel {
         }
     }
 
-    public void sleeper(long timeSec){
+    public void sleeper(long timeMilli){
         try {
-            sleep(timeSec);
+            sleep(timeMilli);
         } catch (InterruptedException e) {
             System.out.println("Timer error");
         }
@@ -190,7 +170,7 @@ public class Monde extends JPanel {
 
     public Monde() {
         score = 0;
-        setSize(800, 500);
+        setSize(800, 550);
         boss = new Boss(2, 2);
         add(boss);
         boss.setLocation(800, 100);
@@ -201,7 +181,6 @@ public class Monde extends JPanel {
         }
 
         timer.start();
-
         trdEtoiles.start();
         trdVaisseau.start();
 
@@ -274,7 +253,7 @@ public class Monde extends JPanel {
         Random rdm = new Random();
 
         int nbEtoiles = rdm.nextInt(4);
-        int tailleEtoiles = rdm.nextInt(4);
+        int tailleEtoiles;
         int y;
         for (int i = 0; i < nbEtoiles; i++) {
             tailleEtoiles = rdm.nextInt(4);
@@ -287,13 +266,6 @@ public class Monde extends JPanel {
 
             str.setLocation(790, y);
         }
-
-//        for (int i = 0; i < 5; i++) {
-//            Etoile str = new Etoile(3, 3, listCoul.get(rdm.nextInt(10)));
-//            listEtoiles.add(str);
-//            add(str);
-//            str.setLocation(700, 400);
-//        }
     }
 
     /**
