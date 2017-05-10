@@ -834,17 +834,17 @@ public class Monde extends JPanel {
     private void panelsTempsEtScore() {
         pnlTemps.setSize(110, 20);
         pnlTemps.add(lbltime, BorderLayout.CENTER);
-        pnlTemps.setLocation(10, getHeight() - 90);
+        pnlTemps.setLocation(10, getHeight() - 150);
         add(pnlTemps);
 
         pnlScore.setSize(90, 20);
         pnlScore.add(lblScore, BorderLayout.CENTER);
-        pnlScore.setLocation(getWidth() - 450, getHeight() - 90);
+        pnlScore.setLocation(getWidth() - 450, getHeight() - 150);
         add(pnlScore);
 
         pnlCompte.setSize(103, 20);
         pnlCompte.add(lblCompte, BorderLayout.CENTER);
-        pnlCompte.setLocation(getWidth() - 150, getHeight() - 90);
+        pnlCompte.setLocation(getWidth() - 150, getHeight() - 150);
 
     }
 

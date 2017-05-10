@@ -28,7 +28,7 @@ private Image nmi3S = Toolkit.getDefaultToolkit().getImage("Enemies/4'.png");
 private boolean anim = false;
 
 
-private Image boom = Toolkit.getDefaultToolkit().getImage("boom.png");
+private Image boom = Toolkit.getDefaultToolkit().getImage("Animations/boom.png");
 
 private int deltaX , deltaY, maxYBound, minYBound,cmptY;
 private boolean isShot = false;
