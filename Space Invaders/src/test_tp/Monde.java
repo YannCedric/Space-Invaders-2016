@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,15 +24,15 @@ import javax.swing.SwingUtilities;
  */
 public class Monde extends JPanel {
 
-    private final ArrayList<Etoile> listEtoiles = new ArrayList();
-    private final ArrayList<Enemi> listEnem = new ArrayList();
-    private final ArrayList<Enemi> listEnemEnlever = new ArrayList();
+    private final LinkedList<Etoile> listEtoiles = new LinkedList<>();
+    private final LinkedList<Enemi> listEnem = new LinkedList<>();
+    private final LinkedList<Enemi> listEnemEnlever = new LinkedList<>();
     private final ArrayList<Etoile> listAEnlever = new ArrayList();
     private final ArrayList<Projectile> listAEnleverProj = new ArrayList();
     private final ArrayList<Coeur> listCoeurs = new ArrayList();
     private final ArrayList<Coeur> listCoeursAEnlever = new ArrayList();
     private final ArrayList<Color> listCoul = new ArrayList();
-    private final ArrayList<Projectile> projectiles = new ArrayList();
+    private final LinkedList<Projectile> projectiles = new LinkedList<>();
     private final ArrayList<PowerUp> listPwr = new ArrayList();
     private final ArrayList<PowerUp> listPwrEnlever = new ArrayList();
     private int nbViesJoeur = 3;
@@ -60,6 +61,8 @@ public class Monde extends JPanel {
         }
     });
 
+    private int starSpeed = 5;
+
     private final Thread trdEtoiles = new Thread() {
 
         @Override
@@ -79,7 +82,7 @@ public class Monde extends JPanel {
 
                 invalidate();
                 repaint();
-                sleeper(5);
+                sleeper(starSpeed);
             }
         }
     };
@@ -117,6 +120,7 @@ public class Monde extends JPanel {
                 }
 
                 if (temps >= tempsBoss) {
+                    addBoss();
                     bossMode();
                     if (pnlAjoutee == false) {
                         add(pnlCompte);
@@ -167,13 +171,21 @@ public class Monde extends JPanel {
         }
     }
 
+    public void addBoss(){
+        if (!isBoss){
+            boss = new Boss(2, 2);
+            add(boss);
+            boss.setLocation(800, 100);
+        }
+
+        starSpeed = 50;
+
+    }
+
 
     public Monde() {
         score = 0;
         setSize(800, 550);
-        boss = new Boss(2, 2);
-        add(boss);
-        boss.setLocation(800, 100);
 
         for (int i = 0; i < 10; i++) {
             listCoul.add(Color.white);
